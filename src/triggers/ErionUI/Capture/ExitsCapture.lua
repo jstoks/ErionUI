@@ -1,0 +1,5 @@
+clearWindow("ExitsConsole")
+selectCurrentLine()
+copy()
+ExitsConsole:appendBuffer()
+replaceLine("")

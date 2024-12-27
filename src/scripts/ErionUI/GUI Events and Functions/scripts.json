@@ -1,0 +1,50 @@
+[
+       {
+              "name": "BottomUI Functions",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "LeftUI Functions",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "RightUI Funtions",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "GUI_Refresh Event",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "GUI_UpdateStatus Event (Left)",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "GUI_UpdatePromp Event (Bottom)",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "GUI_UpdateMapName Event (Left)",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       },
+       {
+              "name": "GUI_ReWrap Event",
+              "isActive": "yes",
+              "script": "",
+              "isFolder": "no"
+       }
+]

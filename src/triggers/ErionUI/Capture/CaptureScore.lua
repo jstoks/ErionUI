@@ -1,0 +1,5 @@
+CleanScoreBuffer()
+selectCurrentLine()
+copy()
+appendBuffer("ScoreBuffer")
+moveCursorDown("ScoreBuffer")
