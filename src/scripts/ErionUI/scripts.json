@@ -1,8 +1,26 @@
 [
-       {
-              "name": "GUI Events and Functions",
-              "isActive": "yes",
-              "script": "",
-              "isFolder": "yes"
-       }
+  {
+    "name": "gui",
+    "isActive": "yes",
+    "script": "",
+    "isFolder": "yes"
+  },
+  {
+    "name": "ErionGUI_Start_Event"
+  },
+  {
+    "name": "FunctionLibrary"
+  },
+  {
+    "name": "Initialize_UI_Event"
+  },
+  {
+    "name": "UI_System_Setings_Event"
+  },
+  {
+    "name": "data"
+  },
+  {
+    "name": "sys"
+  }
 ]

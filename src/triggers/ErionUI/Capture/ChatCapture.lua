@@ -20,4 +20,4 @@ end
 
 
 appendBuffer("ChatLog")
-appendBuffer("ChatBuffer")
+-- appendBuffer("ChatBuffer")

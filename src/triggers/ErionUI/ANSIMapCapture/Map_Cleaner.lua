@@ -1,2 +1,2 @@
-selectCaptureGroup(1)
-replace("")
+selectCaptureGroup('clear')
+replace()

@@ -8,14 +8,14 @@ function GUIRefresh (event)
   BuildLeftContainer()
   BuildErionLabel()
   BuildStatsConsole()
-  BuildMapNameConsole()
+  --BuildMapNameConsole()
   BuildMapConsole()
   BuildExitsConsole()
   
   --Right UI
   
-  BuildRightContainer()
-  BuildChatConsole()
+  --BuildRightContainer()
+  --BuildChatConsole()
   
   --Bottom UI
   
