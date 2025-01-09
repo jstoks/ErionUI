@@ -1,17 +1,19 @@
 if CMap == 0 then
   MapConsole:clear()
   
-  selectCaptureGroup(1)
+  selectCaptureGroup('map')
   copy()
   MapConsole:appendBuffer()
+  selectCaptureGroup('clear')
   replace()
   
   CMap = 1
 else
   
-  selectCaptureGroup(1)
+  selectCaptureGroup('map')
   copy()
   MapConsole:appendBuffer()
+  selectCaptureGroup('clear')
   replace()
 
   CMap = 2

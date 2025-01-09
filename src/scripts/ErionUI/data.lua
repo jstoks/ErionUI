@@ -1,3 +1,9 @@
+ErionUI = ErionUI or {}
+ErionUI.Data = ErionUI.Data or {}
+
+local Dataset = {}
+
+-- Test
 local function initialize()
   erion = erion or {}
   local data = erion.data or {}
@@ -17,25 +23,30 @@ local function initialize()
     },
   }
 
+  local location = data.location or {
+    area = '',
+    room = '',
+    sector = '',
+    vnum = ''
+  }
+
   erion.data = Dataset:new('data', {
-    character = character
+    character = character,
+    location = location
   })
+  ErionUI.Data = erion.data
 end
 
-
-local Dataset = {}
-local Changeset = {}
-local Change = {}
-
-local Log = Log or require('FancyErion.loginator')
-local log = log or Log:new({ name = "dataset", level = "debug" })
-
-function Dataset:new(key, data)
+function Dataset:new(path, data)
   data = data or {}
 
-  local dataset = { key = key }
+  local key = undot(path)
+  local dataset = {}
+  local metadata = { path = path, key = key }
+  metadata.__index = metadata
+  setmetatable(dataset, metadata)
   self.__index = self
-  setmetatable(dataset, self)
+  setmetatable(metadata, self)
 
   for k,v in pairs(data) do
     if type(v) == "table" then
@@ -49,14 +60,16 @@ function Dataset:new(key, data)
 end
 
 function Dataset:define(key, data)
-  return Dataset:new(self.key .. '.' .. key, data)
+  return Dataset:new(dot(self.key, key), data)
 end
 
-function Dataset:changeset(data)
+function Dataset:setchanges(data, changes)
+  changes = changes or {}
   local typeData = type(data)
-  local changes = {}
+  local changedData = {}
   assert(type(data) == "table", "Data must be a table")
 
+  debugc("updating")
   for key, value in pairs(self) do
     local dataValue = data[key]
 
@@ -64,57 +77,41 @@ function Dataset:changeset(data)
     if dataValue then
       local typeValue = type(value)
       local typeDataValue = type(dataValue)
-      let changeKey = makeKey(self.key, key)
 
       assert(typeValue == typeDataValue, "Data must have same shape. " .. typeValue .. 'vs' .. typeDataValue)
 
       if typeValue == "table" then
-        changes[key] = value:changeset(dataValue)
+        local nestedChanges = value:setchanges(dataValue, changes)
+        if next(nestedChanges) ~= nil then
+          changedData[key] = nestedChanges
+        end
       elseif value ~= dataValue then
-        changes[key] = Change:new(changeKey, dataValue, value)
+        changedData[key] = dataValue
         self[key] = dataValue
-        log:debug("Set " .. changeKey .. ' = ' .. dataValue)
+        table.insert(changes, { path = dot(self.path, key), value = dataValue })
+        debugc(string.format("Changed: %s - %s", key, dataValue))
       else
-        log:debug("Values equal for key: " .. changeKey)
+        debugc(string.format("Unchanged: %s", key))
       end
     end
   end
+  if next(changedData) ~= nil then
+    table.insert(changes, { path = self.path, value = changedData})
+  end
 
-  return Changeset:new(self.key, changes)
+  return changedData
 end
 
 function Dataset:update(data) 
-  local changeset = self:changeset(data)
-  changeset:broadcast('erion')
-end
+  debugc('ok')
+  local changes = {}
+  self:setchanges(data, changes)
 
-function Changeset:new(key, changes)
-  local obj = {
-    changes = changes or {},
-    key = key,
-  }
-  self.__index = self
-  setmetatable(obj, self)
-  return obj
-end
-
-function Changeset:broadcast(prefix)
-  for key, change in pairs(self.changes) do
-    change:broadcast(prefix)
+  for _,change in ipairs(changes) do
+    raiseEvent(change.path, change.value)
+    debugc(string.format("Raised %s", change.path))
   end
 end
 
-function Change:new(key, value, oldValue)
-  local obj = { key = key, value = value, oldValue = oldValue }
-  self.__index = self
-  setmetatable(obj, self)
-  return obj
-end
+registerAnonymousEventHandler('erion.sys.boot', initialize, true)
 
-function Change:broadcast(prefix)
-  local eventName = prefix .. '.' .. self.key
-  raiseEvent(eventName, self.value, self.oldValue)
-  log:debug(string.format("raiseEvent(%s,%s,%s)", eventName, self.value, self.oldValue))
-end
-
-initialize()

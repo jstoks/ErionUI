@@ -1,3 +1,13 @@
+
+erion.data.location:update({
+  area = matches.ANM,
+  room = matches.RNM,
+  sector = matches.RMS,
+  vnum = matches.VNM,
+})
+
+debugc("CAP")
+
 local CHP = matches.CHP
 local MHP = matches.MHP
 local CMP = matches.CMP
@@ -38,7 +48,7 @@ deleteLine("MainBuffer")
 
 raiseEvent("GUI_UpdateStatus", LVL, FLV, NXP, GLD, QPS, HPS, MDP, QTM, ETM, GTM, JTM, XPE, QPE, QTE, PLT) 
 raiseEvent("GUI_UpdatePrompt", CHP, MHP, CMP, MMP, THP, TNM, LMP, PRE, PHP) 
-raiseEvent("GUI_UpdateMapName", RNM, ANM, RMS, VNM)
+--raiseEvent("GUI_UpdateMapName", RNM, ANM, RMS, VNM)
 
 -- prompt #1%h#2%H#3%m#4%M#5%p#6%T#7%x#8%X#9%g#10%C#11%u#12%r#13%e#14%L#15%I#16%n#17%B#18%S#19%R#20%f#21%F#22%J#23%j#24%G#25%k#26%K#27%N#28%P#29%Z#
 -- regex = ^(?'PRE'[^#]+|)#1(?'CHP'[^#]+|)#2(?'MHP'[^#]+|)#3(?'CMP'[^#]+|)#4(?'MMP'[^#]+|)#5(?'THP'[^#]+|)#6(?'TNM'[^#]+|)#7(?'CXP'[^#]+|)#8(?'NXP'[^#]+|)#9(?'GLD'[^#]+|)#10(?'QPS'[^#]+|)#11(?'HPS'[^#]+|)#12(?'RNM'[^#]+|)#13(?'EXT'[^#]+|)#14(?'LVL'[^#]+|)#15(?'FLV'[^#]+|)#16(?'LMP'[^#]+|)#17(?'ANM'[^#]+|)#18(?'RMS'[^#]+|)#19(?'VNM'[^#]+|)#20(?'QTM'[^#]+|)#21(?'ETM'[^#]+|)#22(?'GTM'[^#]+|)#23(?'JTM'[^#]+|)#24(?'XPE'[^#]+|)#25(?'QPE'[^#]+|)#26(?'QTE'[^#]+|)#27(?'MDP'[^#]+|)#28(?'PHP'[^#]+)#29(?'PLT'[^#]+)#

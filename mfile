@@ -1,10 +1,10 @@
 {
        "package": "ErionUI",
-       "title": "",
-       "description": "",
-       "version": "",
+       "title": "Erion UI",
+       "description": "A UI for Erion",
+       "version": "0.1.1",
        "author": "",
        "icon": "",
        "dependencies": "",
-       "outputFile": false
+       "outputFile": true
 }

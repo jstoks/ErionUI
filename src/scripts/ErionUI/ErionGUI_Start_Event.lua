@@ -1,11 +1,9 @@
+
+--A couple of variables that I need to ensure are set at 0 initally
+CMap = CMap or 0
+Score_Buffer_Count = Score_Buffer_Count or 0
+
 function StartUp ()
-  
-  --A couple of variables that I need to ensure are set at 0 initally
-  CMap = 0
-  Score_Buffer_Count = 0
-  raiseEvent("InitializeUI")
-  --Silent_Line_Count  = 0
-  
   
   
   tempRegexTrigger("Welcome to Erion!|Reconnecting",
@@ -32,4 +30,4 @@ function StartUp ()
     end, 1)
 end
 
-registerAnonymousEventHandler("sysConnectionEvent", "StartUp")
+registerAnonymousEventHandler("erion.sys.boot", "StartUp", true)

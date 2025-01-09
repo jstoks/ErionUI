@@ -17,19 +17,19 @@ function InitUI ()
   BuildLeftContainer()
   BuildErionLabel()
   BuildStatsConsole()
-  BuildMapNameConsole()
+  --BuildMapNameConsole()
   BuildMapConsole()
   BuildExitsConsole()
   
 --Right (LeftUI Functions)
-  BuildRightContainer()
-  BuildChatConsole()
+  --BuildRightContainer()
+  --BuildChatConsole()
   --BuildMapLable()
   --BuildMapper()
 
   
-  RightContainer:attachToBorder("right")
-  RightContainer:connectToBorder("right")
+  --RightContainer:attachToBorder("right")
+  --RightContainer:connectToBorder("right")
   --RightContainer:lockContainer("light")
   
 --Bottom (BottomUI Functions)
@@ -39,4 +39,4 @@ function InitUI ()
 
 end
 
-registerAnonymousEventHandler("InitializeUI", "InitUI")
+registerAnonymousEventHandler("erion.sys.boot", "InitUI", true)

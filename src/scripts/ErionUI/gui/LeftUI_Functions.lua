@@ -1,11 +1,5 @@
--- Define functions to draw left container UI
-
 function BuildLeftContainer()
-  LeftContainer = Geyser.Container:new({
-  Name = "MapContainer",
-  x=0, y=0,
-  width = 265, height="100%",
-})
+  LeftContainer = ErionUI.Gui.LeftContainer
 end
 
 function BuildErionLabel()
@@ -25,23 +19,11 @@ function BuildStatsConsole()
   StatsConsole = Geyser.MiniConsole:new({
     name = "StatsConsole",
     x = 30, y = 80,
-    width = "98%-30", height = "400px",
+    width = "98%-30", height = "300px",
     autoWrap = false,
     scrollBar = false,
     color = "black",
     fontSize = 10,
-  }, LeftContainer)
-end
-
-function BuildMapNameConsole()
-  MapNameConsole = Geyser.MiniConsole:new({
-    name = "MapNameConsole",
-    x = 30, y = "100%-433px",
-    width = "240px", height = "100px",
-    autoWrap = false,
-    scrollBar = false,
-    color = "black",
-    fontSize = 9,
   }, LeftContainer)
 end
 
@@ -68,3 +50,6 @@ function BuildExitsConsole()
     fontSize = 10,
   }, LeftContainer)
 end
+
+
+

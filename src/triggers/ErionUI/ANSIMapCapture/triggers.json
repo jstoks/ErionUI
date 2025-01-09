@@ -13,7 +13,7 @@
               "highlightBG": "#ffff00",
               "patterns": [
                      {
-                            "pattern": "(^[+]\\-{9}[+]  )",
+                            "pattern": "(?'clear'(?'map'^[+]\\-{9}[+])\\s{2})",
                             "type": "regex"
                      }
               ],
@@ -33,7 +33,7 @@
               "highlightBG": "#ffff00",
               "patterns": [
                      {
-                            "pattern": "(^\\|.{9}\\|  )",
+                            "pattern": "(?'clear'(?'map'^\\|.{9}\\|)\\s{2})",
                             "type": "regex"
                      }
               ],
@@ -53,7 +53,7 @@
               "highlightBG": "#ffff00",
               "patterns": [
                      {
-                            "pattern": "(^             )[^ ]",
+                            "pattern": "(?'clear'^             )[^ ]",
                             "type": "regex"
                      }
               ],
