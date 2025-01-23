@@ -1,0 +1,26 @@
+[
+  {
+    "name": "game_detail_capture",
+    "isActive": "yes",
+    "isFolder": "no",
+    "multiline": "no",
+    "multilineDelta": "0",
+    "matchall": "no",
+    "filter": "no",
+    "fireLength": "0",
+    "highlight": "no",
+    "highlightFG": "#ff0000",
+    "highlightBG": "#ffff00",
+    "patterns": [
+      {
+            "pattern": "The phrase is:",
+            "type": "startOfLine"
+      },
+      {
+            "pattern": "The scrambled phrase is:",
+            "type": "sartOfLine"
+      }
+    ],
+    "script": ""
+  }
+]

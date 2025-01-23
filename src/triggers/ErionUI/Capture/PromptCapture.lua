@@ -6,8 +6,6 @@ erion.data.location:update({
   vnum = matches.VNM,
 })
 
-debugc("CAP")
-
 local CHP = matches.CHP
 local MHP = matches.MHP
 local CMP = matches.CMP
@@ -41,10 +39,6 @@ local PLT = matches.PLT
 
 selectCurrentLine()
 deleteLine()
-
-moveCursor("MainBuffer", 0, getLastLineNumber("MainBuffer")-2)
-deleteLine("MainBuffer")
-deleteLine("MainBuffer")
 
 raiseEvent("GUI_UpdateStatus", LVL, FLV, NXP, GLD, QPS, HPS, MDP, QTM, ETM, GTM, JTM, XPE, QPE, QTE, PLT) 
 raiseEvent("GUI_UpdatePrompt", CHP, MHP, CMP, MMP, THP, TNM, LMP, PRE, PHP) 

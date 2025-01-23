@@ -51,6 +51,18 @@
     "name": "location",
   },
   {
+        "name": "main",
+        "isActive": "yes",
+        "script": "",
+        "isFolder": "no"
+  },
+  {
+    "name": "ascii_map"
+  },
+  {
+    "name": "exits",
+  },
+  {
     "name": "side-containers",
   }
 ]

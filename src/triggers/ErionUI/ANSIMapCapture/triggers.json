@@ -1,6 +1,6 @@
 [
        {
-              "name": "Map Trigger (Border)",
+              "name": "border",
               "isActive": "yes",
               "isFolder": "no",
               "multiline": "no",
@@ -13,14 +13,14 @@
               "highlightBG": "#ffff00",
               "patterns": [
                      {
-                            "pattern": "(?'clear'(?'map'^[+]\\-{9}[+])\\s{2})",
-                            "type": "regex"
+                            "pattern": "+---------+  ",
+                            "type": "startOfLine"
                      }
               ],
               "script": ""
        },
        {
-              "name": "Map Trigger (Map)",
+              "name": "row",
               "isActive": "yes",
               "isFolder": "no",
               "multiline": "no",
@@ -33,7 +33,7 @@
               "highlightBG": "#ffff00",
               "patterns": [
                      {
-                            "pattern": "(?'clear'(?'map'^\\|.{9}\\|)\\s{2})",
+                            "pattern": "^\\|.{9}\\|",
                             "type": "regex"
                      }
               ],

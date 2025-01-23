@@ -1,9 +1,8 @@
 function InitUI ()
 
 --Buffers for word wrapping
-  createBuffer("MainBuffer")
-  createBuffer("ChatBuffer")
-  createBuffer("ScoreBuffer")
+  -- createBuffer("ChatBuffer")
+  --createBuffer("ScoreBuffer")
 
 --UI Functions
 
@@ -18,8 +17,8 @@ function InitUI ()
   BuildErionLabel()
   BuildStatsConsole()
   --BuildMapNameConsole()
-  BuildMapConsole()
-  BuildExitsConsole()
+  --BuildMapConsole()
+  -- BuildExitsConsole()
   
 --Right (LeftUI Functions)
   --BuildRightContainer()
