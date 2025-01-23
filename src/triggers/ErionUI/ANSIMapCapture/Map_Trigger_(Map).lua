@@ -1,5 +1,0 @@
-  selectCaptureGroup('map')
-  copy()
-  MapConsole:appendBuffer()
-  selectCaptureGroup('clear')
-  replace()

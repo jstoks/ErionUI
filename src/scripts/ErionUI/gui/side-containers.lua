@@ -1,7 +1,7 @@
-ErionUI = ErionUI or {}
-ErionUI.Gui = ErionUI.Gui or {}
+erion = erion or {}
+erion.gui = erion.gui or {}
 
-local gui = ErionUI.Gui
+local gui = erion.gui
 
 gui.LeftContainer = Geyser.Container:new({
   name = "LeftContainer",

@@ -9,7 +9,7 @@ function GUIRefresh (event)
   BuildErionLabel()
   BuildStatsConsole()
   --BuildMapNameConsole()
-  BuildMapConsole()
+  -- BuildMapConsole()
   BuildExitsConsole()
   
   --Right UI
@@ -27,5 +27,5 @@ function GUIRefresh (event)
   
 end
 
-registerAnonymousEventHandler("GUI_Refresh", "GUIRefresh")
+-- registerAnonymousEventHandler("GUI_Refresh", "GUIRefresh")
 

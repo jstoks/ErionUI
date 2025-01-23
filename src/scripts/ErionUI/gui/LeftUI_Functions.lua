@@ -1,5 +1,5 @@
 function BuildLeftContainer()
-  LeftContainer = ErionUI.Gui.LeftContainer
+  LeftContainer = erion.gui.LeftContainer
 end
 
 function BuildErionLabel()
@@ -26,30 +26,3 @@ function BuildStatsConsole()
     fontSize = 10,
   }, LeftContainer)
 end
-
-function BuildMapConsole()
-  MapConsole = Geyser.MiniConsole:new({
-    name = "MapConsole",
-    x= 65, y="100%-340px",
-    width="140", height="300px", 
-    autoWrap = false,
-    scrollBar = false,
-    color = "black",
-    fontSize = 15,
-  }, LeftContainer)
-end
-
-function BuildExitsConsole()
-  ExitsConsole = Geyser.MiniConsole:new({
-    name = "ExitsConsole",
-    x = 60, y = "100%-70px",
-    width = "180px", height = "40px",
-    autoWrap = true,
-    scrollBar = false,
-    color = "black",
-    fontSize = 10,
-  }, LeftContainer)
-end
-
-
-

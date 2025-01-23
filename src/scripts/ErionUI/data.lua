@@ -1,12 +1,11 @@
-ErionUI = ErionUI or {}
-ErionUI.Data = ErionUI.Data or {}
+erion = erion or {}
+erion.data = erion.data or {}
 
 local Dataset = {}
 
--- Test
-local function initialize()
-  erion = erion or {}
-  local data = erion.data or {}
+local function boot()
+  debugc('data: boot')
+  local data = erion.data
 
   local character = data.character or {
     hp = {
@@ -27,14 +26,21 @@ local function initialize()
     area = '',
     room = '',
     sector = '',
-    vnum = ''
+    vnum = '',
+    exits = {
+      north = '_',
+      east = '_',
+      south = '_',
+      west = '_',
+      up = '_',
+      down = '_',
+    },
   }
 
   erion.data = Dataset:new('data', {
     character = character,
     location = location
   })
-  ErionUI.Data = erion.data
 end
 
 function Dataset:new(path, data)
@@ -60,7 +66,7 @@ function Dataset:new(path, data)
 end
 
 function Dataset:define(key, data)
-  return Dataset:new(dot(self.key, key), data)
+  return Dataset:new(dot(self.path, key), data)
 end
 
 function Dataset:setchanges(data, changes)
@@ -113,5 +119,5 @@ function Dataset:update(data)
   end
 end
 
-registerAnonymousEventHandler('erion.sys.boot', initialize, true)
+registerAnonymousEventHandler('erion.sys.boot', boot, true)
 

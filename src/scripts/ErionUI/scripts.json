@@ -6,10 +6,10 @@
     "isFolder": "yes"
   },
   {
-    "name": "ErionGUI_Start_Event"
+    "name": "start"
   },
   {
-    "name": "FunctionLibrary"
+    "name": "utils"
   },
   {
     "name": "Initialize_UI_Event"
