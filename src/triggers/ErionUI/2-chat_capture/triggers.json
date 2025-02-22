@@ -1,0 +1,82 @@
+[
+  {
+    "name": "main_capture",
+    "isActive": "yes",
+    "isFolder": "no",
+    "multiline": "no",
+    "multilineDelta": "0",
+    "matchall": "no",
+    "filter": "no",
+    "fireLength": "0",
+    "highlight": "no",
+    "highlightFG": "#ff0000",
+    "highlightBG": "#ffff00",
+    "patterns": [
+      {
+        "pattern": "^\\\u003c?\\[(?<channel>(?:chat|newbie|grats|music|quote|roleplay|client|GUESS|Quest|Levels|Global Quest|Newbies|Logout|Login|mudevent|SCRAMBLE|Player Deaths|Class|COLOSSEUM|Healers|Rankings|Expedition|Achievement))\\]\\\u003c?.+$",
+        "type": "regex"
+      },
+      {
+        "pattern": "^(?<channel>Auction).+$",
+        "type": "regex"
+      }
+    ]
+  },
+  {
+    "name": "guess_finish_capture",
+    "isActive": "yes",
+    "isFolder": "no",
+    "multiline": "no",
+    "multilineDelta": "0",
+    "matchall": "no",
+    "filter": "no",
+    "fireLength": "0",
+    "highlight": "no",
+    "highlightFG": "#ff0000",
+    "highlightBG": "#ffff00",
+    "patterns": [
+      {
+        "pattern": "The phrase is:",
+        "type": "startOfLine"
+      }
+    ]
+  },
+  {
+    "name": "scramble_finish_capture",
+    "isActive": "yes",
+    "isFolder": "no",
+    "multiline": "no",
+    "multilineDelta": "0",
+    "matchall": "no",
+    "filter": "no",
+    "fireLength": "0",
+    "highlight": "no",
+    "highlightFG": "#ff0000",
+    "highlightBG": "#ffff00",
+    "patterns": [
+      {
+        "pattern": "The scrambled phrase is:",
+        "type": "startOfLine"
+      }
+    ]
+  },
+  {
+    "name": "kill_capture",
+    "isActive": "yes",
+    "isFolder": "no",
+    "multiline": "no",
+    "multilineDelta": "0",
+    "matchall": "no",
+    "filter": "no",
+    "fireLength": "0",
+    "highlight": "no",
+    "highlightFG": "#ff0000",
+    "highlightBG": "#ffff00",
+    "patterns": [
+      {
+        "pattern": "^<<< [\\w]+ has killed the .+? monster! .+? >>>$",
+        "type": "regex"
+      }
+    ]
+  }
+]

@@ -1,18 +1,18 @@
 [
   {
-    "name": "ANSIMapCapture",
+    "name": "1-ansi_map_capture",
     "isActive": "yes",
     "script": "",
     "isFolder": "yes"
   },
   {
-    "name": "ChatCapture",
+    "name": "2-chat_capture",
     "isActive": "yes",
     "script": "",
     "isFolder": "yes"
   },
   {
-    "name": "Capture",
+    "name": "9-capture",
     "isActive": "yes",
     "script": "",
     "isFolder": "yes"

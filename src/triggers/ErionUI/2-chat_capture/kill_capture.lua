@@ -2,4 +2,4 @@ selectCurrentLine()
 local line = copy2decho()
 deleteLine()
 
-raiseEvent('erion.chat.line', line, 'Games')
+raiseEvent('erion.chat.line', 'killed', line)
