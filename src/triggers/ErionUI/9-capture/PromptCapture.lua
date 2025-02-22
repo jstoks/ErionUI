@@ -39,7 +39,6 @@ local PLT = matches.PLT
 
 selectCurrentLine()
 deleteLine()
-deleteLine()
 
 raiseEvent("GUI_UpdateStatus", LVL, FLV, NXP, GLD, QPS, HPS, MDP, QTM, ETM, GTM, JTM, XPE, QPE, QTE, PLT) 
 raiseEvent("GUI_UpdatePrompt", CHP, MHP, CMP, MMP, THP, TNM, LMP, PRE, PHP) 
