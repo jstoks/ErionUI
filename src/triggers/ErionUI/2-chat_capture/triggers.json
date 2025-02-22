@@ -13,7 +13,7 @@
     "highlightBG": "#ffff00",
     "patterns": [
       {
-        "pattern": "^\\\u003c?\\[(?<channel>(?:chat|newbie|grats|music|quote|roleplay|client|GUESS|Quest|Levels|Global Quest|Newbies|Logout|Login|mudevent|SCRAMBLE|Player Deaths|Class|COLOSSEUM|Healers|Rankings|Expedition|Achievement))\\]\\\u003c?.+$",
+        "pattern": "^\\\u003c?\\[(?<channel>(?:chat|newbie|grats|music|quote|roleplay|client|GUESS|Quest|Levels|Global Quest|Newbies|Logout|Login|mudevent|SCRAMBLE|Player Deaths|Class|COLOSSEUM|Healers|Rankings|Expedition|Achievement|NEW Player))\\]\\\u003c?.+$",
         "type": "regex"
       },
       {
