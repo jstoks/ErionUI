@@ -23,13 +23,13 @@ end
 chat.init = function()
   debugc("Chat: init")
 
-  local chatWindow = Adjustable.Container:new({
+  chat.window = Adjustable.Container:new({
     name = "ChatWindow",
     titleText = "Chat Messages",
     x = "-25%", y = 0,
     width = "25%",
     height = "100%",
-    adjLabelstyle = boxCSS, 
+    adjLabelstyle = boxCSS,
     attached = "right" ,
   })
 
@@ -50,7 +50,7 @@ chat.init = function()
     text-decoration: underline;
   ]]
 
-  local chatTabs = Ecmo:new({
+  chat.tabs = Ecmo:new({
     x = "0",
     y = "0",
     width = "100%",
@@ -67,33 +67,82 @@ chat.init = function()
     consoles = {
       "Chat",
       "All", 
-      "System",
+      "Misc",
     },
     mapTab = false,
     activeTabCSS = tabStylesheet,
     inactiveTabCSS = inactiveTabStylesheet,
-  }, chatWindow) 
+  }, chat.window) 
 
-  local buffers = {
-    Chat = 'ChatBuffer',
-    All = 'AllBuffer',
-    System = 'SystemBuffer',
-  }
+  local cb = lux.ChanneledBuffers:new()
+
+  cb:addChannel('chat')
+  cb:addChannel('newbie')
+  cb:addChannel('grats')
+  cb:addChannel('quote')
+  cb:addChannel('roleplay')
+  cb:addChannel('client')
+  cb:addChannel('Newbies')
+  cb:addChannel('Class')
+  cb:addChannel('Healers')
+  cb:addChannel('Auction')
+  cb:addChannel('music')
+  cb:addChannel('Quest')
+  cb:addChannel('Global Quest')
+  cb:addChannel('mudevent')
+  cb:addChannel('Player Deaths')
+  cb:addChannel('COLOSSEUM')
+  cb:addChannel('GUESS')
+  cb:addChannel('SCRAMBLE')
+  cb:addChannel('Levels')
+  cb:addChannel('Logout')
+  cb:addChannel('Login')
+  cb:addChannel('NEW Player')
+  cb:addChannel('killed')
+  cb:addChannel('Rankings')
+  cb:addChannel('Expedition')
+  cb:addChannel('Achievement')
+
+  cb:addBuffer('chat', function (line) chat.tabs:decho('Chat', line) end)
+  cb:addBuffer('misc', function (line) chat.tabs:decho('Misc', line) end)
+  cb:defaultBuffer('chat')
+
+  cb:connect('chat', 'chat')
+  cb:connect('newbie', 'chat')
+  cb:connect('grats', 'chat')
+  cb:connect('quote', 'chat')
+  cb:connect('roleplay', 'chat')
+  cb:connect('client', 'chat')
+  cb:connect('Newbies', 'chat')
+  cb:connect('Class', 'chat')
+  cb:connect('Healers', 'chat')
+  cb:connect('Auction', 'chat')
+  cb:connect('music', 'chat')
+
+  cb:connect('Quest', 'misc')
+  cb:connect('Global Quest', 'misc')
+  cb:connect('mudevent', 'misc')
+  cb:connect('Player Deaths', 'misc')
+  cb:connect('COLOSSEUM', 'misc')
+  cb:connect('GUESS', 'misc')
+  cb:connect('SCRAMBLE', 'misc')
+  cb:connect('Levels', 'misc')
+  cb:connect('Logout', 'misc')
+  cb:connect('Login', 'misc')
+  cb:connect('NEW Player', 'misc')
+  cb:connect('killed', 'misc')
+  cb:connect('Rankings', 'misc')
+  cb:connect('Expedition', 'misc')
+  cb:connect('Achievement', 'misc')
+
+  chat.channelBuffer = cb
+
+  debugc("chat ready")
 
   evHandlers.onChatLine = registerAnonymousEventHandler(
-    'erion.chat.line', function (ev, line, type)
-      debugc("chat type: " .. type)
-      type = type or 'Chat'
-      if type == 'Games' then
-        type = "System"
-      end
+    'erion.chat.line', function (ev, channel, line)
 
-      tab = type
-
-      debugc("Chat: line")
-      line = line .. "\n"
-      chatTabs:decho(tab, line)
-      --decho("ChatBuffer", line)
+      chat.channelBuffer:pushLine(channel, line .. "\n")
     end
   )
   
@@ -125,5 +174,6 @@ function chat.reWrap()
     appendBuffer('ChatLog')
   end
 end
+
 
 evHandlers.onBoot = registerAnonymousEventHandler("erion.sys.boot", gui.chat.boot, true)

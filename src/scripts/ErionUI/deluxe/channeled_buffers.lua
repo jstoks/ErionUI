@@ -1,15 +1,18 @@
 lux = lux or {}
+lux.ChanneledBuffers = lux.ChanneledBuffers or {}
+lux.ChanneledBuffers.__index = lux.ChanneledBuffers
 
 -- pull in global methods
 local next = next
 local table_concat = table.concat
 local table_remove = table.remove
+local table_insert = table.insert
 local string_format = string.format
 
-local ECMO = require('ErionUI.ecmo')
-
 local Channel = {}
+Channel.__index = Channel
 local Buffer = {}
+Buffer.__index = Buffer
 
 function Channel:new(name)
   obj = {
@@ -40,8 +43,11 @@ end
 
 function Channel:describe()
   local str = self.name .. " => "
-  if next(self.buffers) == nil
-  return string_format("%s => %s", self.name, table_concat(self.buffers, ', '))
+  local keys = {}
+  for key, _ in pairs(self.buffers) do
+    table_insert(keys, key)
+  end
+  return str .. table_concat(keys, ', ')
 end
 
 function Buffer:new(name, pushLine)
@@ -66,75 +72,102 @@ function Buffer:disconnectFrom(channel)
   end
 end
 
-function lux.ConsoleSystem:new(options)
+function lux.ChanneledBuffers:new()
   options = options or {}
   local obj = {
     channels = {},
     buffers = {},
     lines = {},
     currentLine = 0,
-    lineLimit = options.lineLimit or 10000
+    lineLimit = 10000
   }
 
   setmetatable(obj, self)
+
+  obj:addChannel('__default__')
+
   return obj
 end
 
-lux.__ConsoleSystem = {}
-
 -- Adds a channel to the chat system
-function lux.ConsoleSystem:addChannel(channelName)
+function lux.ChanneledBuffers:addChannel(channelName)
   if not self.channels[channelName] then
     self.channels[channelName] = Channel:new(channelName)
   end
 end
 
-function lux.ConsoleSystem:addBuffer(bufferName, pushLine)
+function lux.ChanneledBuffers:addBuffer(bufferName, pushLine)
   if not self.buffers[bufferName] then
-    self.buffers[bufferName] = Buffer:new(channelName, pushLine)
+    self.buffers[bufferName] = Buffer:new(bufferName, pushLine)
   end
 end
 
 
-function lux.ConsoleSystem:connect(channelName, bufferName)
+function lux.ChanneledBuffers:connect(channelName, bufferName)
   if self:assertChannel(channelName) and self:assertBuffer(bufferName) then
-    self.channels:connectTo(self.buffers[bufferName])
-    self.buffers:connectTo(self.channels[channelName])
+    self.channels[channelName]:connectTo(self.buffers[bufferName])
+    self.buffers[bufferName]:connectTo(self.channels[channelName])
   end
 end
 
-function lux.ConsoleSystem:disconnect(channelName, bufferName)
+function lux.ChanneledBuffers:defaultBuffer(bufferName)
+  self:addChannel('__default__')
+  self:disconnectAllFromChannel('__default__')
+  self:connect('__default__', bufferName)
+end
+
+function lux.ChanneledBuffers:disconnect(channelName, bufferName)
   if self:assertChannel(channelName) and self:assertBuffer(bufferName) then
     self.channels[channelName]:disconnectFrom(self.buffers[bufferName])
     self.buffers[bufferName]:disconnectFrom(self.channels[channelName])
   end
 end
 
-function lux.ConsoleSystem:assertBuffer(bufferName)
+function lux.ChanneledBuffers:disconnectAllFromChannel(channelName)
+  if self:assertChannel(channelName) then
+    local channel = self.channels[channelName]
+
+    for bufferName, buffer in pairs(channel.buffers) do
+      channel:disconnectFrom(buffer)
+      buffer:disconnectFrom(channel)
+    end
+  end
+end
+
+function lux.ChanneledBuffers:assertBuffer(bufferName)
   if not self.buffers[bufferName] then
-    debugc("Buffer does not exist: " .. bufferName)
-    return nil
+    debugc("Buffer does not exist: " .. (bufferName or 'nil'))
+    return false
   end
+  return true
 end
   
-function lux.ConsoleSystem:assertChannel(channelName)
+function lux.ChanneledBuffers:assertChannel(channelName)
   if not self.channels[channelName] then
-    debugc("Channel does not exist: " .. channelName)
-    return nil
+    debugc("Channel does not exist: " .. (channelName or "nil"))
+    return false
   end
+  return true
 end
   
-function lux.ConsoleSystem:pushLine(channelName, text)
+function lux.ChanneledBuffers:pushLine(channelName, text)
   if self:assertChannel(channelName) then
     local idx = self:nextLineIndex()
 
     self.lines[idx] = { channelName = channelName, text = text}
 
     self.channels[channelName]:pushLine(text)
+  else
+    local idx = self:nextLineIndex()
+
+    self.lines[idx] = { channelName = '__default__', text = text}
+
+
+    self.channels['__default__']:pushLine(text)
   end
 end
 
-function lux.ConsoleSystem:replayAll()
+function lux.ChanneledBuffers:replayAll()
   local currentLine = self.currentLine
   local lineLimit = self.lineLimit 
   local channels = self.channels
@@ -157,7 +190,7 @@ function lux.ConsoleSystem:replayAll()
   end
 end
 
-function lux.ConsoleSystem:nextLineIndex()
+function lux.ChanneledBuffers:nextLineIndex()
   self.currentLine = self.currentLine + 1
   if self.currentLine > self.lineLimit then
     self.currentLine = 1

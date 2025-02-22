@@ -7,6 +7,7 @@ local exits = {
   up = '',
   down = ''
 }
+
 debugc(matches.EXT)
 for dir in matches.EXT:gmatch("%??%w+") do
   debugc(dir)
